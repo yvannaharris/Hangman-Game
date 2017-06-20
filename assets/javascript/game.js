@@ -16,3 +16,7 @@ for (var i = 0; i < words.length; i++) {
 }
 
 var remainingLetters= words.length; 
+
+for (remainingLetters > 0) {
+	
+}
