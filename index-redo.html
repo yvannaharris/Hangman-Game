@@ -1,3 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta harset="UTF-8">
+		<title>Hangman Game</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<!--<script src="assets/javascript/game.js"></script>-->
+	</head>
+<body>
+
+<h2>Press any letter to get started</h2>
+
+<h3>Wins</h3>
+<div id="win-record"></div>
+
+<h3>Current Word</h3>
+<div id="current-word"></div>
+
+<h3>Number of guesses remaining</h3>
+<div id="remaining-guesses"></div>
+
+<h3>Letters already guessed</h3>
+
+<style>
+li {
+	display: inline-block;
+	padding: 0 10px;
+}
+</style>
+
+<script>
 var availableLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",];
 
 var words = [
@@ -75,52 +107,24 @@ document.onkeyup =function(event) {
 }
  console.log("Third loop...");
 
+if (remainingLetters === 0) {
+	wins++;
+}
+
+var score = wins;
+ 
+score = document.getElementById("win-record");
+
+ for (var j = 0; j < word.length; j++) {
+ 	if (word[j] === guess) {
+ 		space[i] = guess;
+ 		remainingLetters--;
+ 	}
+ }
 
 
 
 
-// Get a guess 
-//Action/logic that you want to execute when a user presses on a key. 
-//document.onkeyup = function(event) {
-//		var guess = event.key;
-	
-//	if (availableLetters.indexOf(guess) > -1) {
-		//if ((lettersMatched && lettersMatched.indexOf(guess) > -1) 
-		//	|| (lettersGuessed && lettersGuessed.indexOf(guess) > -1)) {
-
-//		}
-	//}
-
-
-
-// Update the array
-	//for (var j = 0; j < word.length; j++) {
-		//if (word[j] === guess) {
-			//answerArray[j] = guess;
-			//remainingLetters--;
-		//}
-	//}
-	
-
-
-
-
-//Record wins 
-//var wins = 0;
-
-//if (remainingLetters == 0) {
-//	wins++;
-//}
-
-//var score = wins
-
-//document.querySelector("#win-record").innerHTML = score;
-
-
-		//for (var j = 0; j < word.length; j++) {
-		
-		//if(word[j] === guess) {
-			//space[i] = guess;
-			//remainingLetters--;
-			//}
-		//}
+</script>
+</body>
+</html>
