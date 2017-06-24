@@ -21,6 +21,7 @@
 <div id="remaining-guesses"></div>
 
 <h3>Letters already guessed</h3>
+<div id="letters-guessed"></div>
 
 <style>
 li {
@@ -30,19 +31,12 @@ li {
 </style>
 
 <script>
+window.onload = function() {
+
+// Variables
 var availableLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",];
 
-var words = [
-	"PUPPY",
-	"FETCH",
-	"BONE",
-	"BATH TIME",
-	"DOG CHOW",
-];
-
-var wins = 0
-
-var word = words[Math.floor(Math.random() * words.length)];
+var word ;
 
 var guess ;
 
@@ -53,78 +47,117 @@ var counter ;
 
 var space;
 
+// Get elements
+var remainguess = document.getElementById("remaining-guesses");
 
 
-var answerArray = document.getElementById("current-word");
-correct = document.createElement('ul');
+// Guesses ul
+result = function () {
+	var answerArray = document.getElementById("current-word");
+	correct = document.createElement('ul');
 
-for (var i = 0; i < word.length; i++) {
-	correct.setAttribute('id', 'my-word');
-	guess = document.createElement('li');
-	guess.setAttribute('class', 'guess');
+		for (var i = 0; i < word.length; i++) {
+			correct.setAttribute('id', 'my-word');
+			guess = document.createElement('li');
+			guess.setAttribute('class', 'guess');
 	
-	if (word[i] === "-") {
-		guess.innerHTML = "-";
-		space = 1;
-	} else {
-		guess.innerHTML = "_";
-	} 
+			if (word[i] === "-") {
+			guess.innerHTML = "-";
+			space = 1;
+			guesses += guess;
+			lives--;
+			} else {
+			guess.innerHTML = "_";
+			} 
 
-	guesses.push(guess);
-	answerArray.appendChild(correct);
-	correct.appendChild(guess);
 
+
+			guesses.push(guess);
+			answerArray.appendChild(correct);
+			correct.appendChild(guess);
+	}
 }
+
 console.log("After loop...");
 
-var remainguess = document.getElementById("remaining-guesses");
-remainguess.innerHTML =lives;
-if (lives < 1) {
-	alert("Back to the Dog House...");
-	answerArray.reset();
-	remainguess.reset();
-}
-for (var i = 0; i < guess.length; i++) {
-	if (counter + space === guesses.length) {
-		alert("Belly Rubs for You!");
+// Show remaining guesses
+comments = function () {
+	remainguess.innerHTML = lives;
+	if (lives < 1) {
+		alert("Back to the Dog House...");
+		
+	}
+	for (var i = 0; i < guesses.length; i++) {
+		if (counter + space === guesses.length) {
+			alert("Belly Rubs for You!");
+		} 
 	}
 }
-console.log("After second loop");
+comments();
+	console.log("After second loop");
 
-document.onkeyup =function(event) {
-	var guess = String.fromCharCode(event.keyCode).toUpperCase();
+// Show letters guessed 
+progress = function() {
+
+}
+
+// OnKeyUp Function
+check = function () {
+	document.onkeyup =function(event) {
+		var guess = String.fromCharCode(event.keyCode).toUpperCase();
 	console.log(guess);
-	for (var i = 0; i < word.length; i++) {
-		if (word[i] === guess) {
-			guesses[i].innerHTML = guess;
-			counter += 1
+	var lettersGuessed = document.getElementById("letters-guessed");
+
+		for (var i = 0; i < word.length; i++) {
+			if (word[i] === guess) {
+				guesses[i].innerHTML = guess;
+				counter += 1;
+				//lettersGuessed.innerHTML = guess;
+				lettersGuessed.write(guess);
+			}
+		}
+		var j = (word.indexOf(guess));
+		if (j === -1) {
+			lives -= 1;
+			comments();
+		} else {
+			comments();
 		}
 	}
-	var j = (word.indexOf(guess));
-	if (j === -1) {
-		lives -= 1;
-	}
 }
+check();
+
  console.log("Third loop...");
 
-if (remainingLetters === 0) {
-	wins++;
-}
+ //Play
+ play = function () {
+ 	var words = [
+		"PUPPY",
+		"FETCH",
+		"BONE",
+		"BATH TIME",
+		"DOG CHOW",
+	];
 
-var score = wins;
- 
-score = document.getElementById("win-record");
+	word = words[Math.floor(Math.random() * words.length)];
+	console.log(word);
 
- for (var j = 0; j < word.length; j++) {
- 	if (word[j] === guess) {
- 		space[i] = guess;
- 		remainingLetters--;
- 	}
+ 	guesses = [ ];
+ 	lives = 10;
+ 	counter = 0;
+ 	space = 0;
+ 	result();
+ 	comments();
  }
 
+ play();
 
 
 
+
+
+
+}
 </script>
 </body>
 </html>
